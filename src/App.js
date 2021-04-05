@@ -11,9 +11,9 @@ function App() {
   const todoNameRef = useRef()
 
 
+  // Local Storage Initial Render
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-
     if (storedTodos) setTodos(storedTodos)
   },[])
 
@@ -44,12 +44,17 @@ function App() {
     setTodos(newTodos)
   }
 
+
   return (
-    <div>
-      <TodoList todos={todos} toggleTodo={toggleTodo}/>
-      <input ref={todoNameRef} type="text"/>
-      <button onClick={handleAddTodo}>Add Todo</button>
-      <button onClick={handleClearTodos}>Clear Complete</button>
+    <div class="wrapper">
+      <div class="header">
+        <h1>Goodmorning Simon</h1>
+        <p>You have {todos.filter(todo => !todo.complete).length} to do left</p>
+      </div>
+    <TodoList todos={todos} toggleTodo={toggleTodo}/>
+    <input ref={todoNameRef} type="text" placeholder="New todo..."/>
+    <button onClick={handleAddTodo} id="add">Add Todo</button>
+    <button onClick={handleClearTodos}>Clear Complete</button>
     </div>
   );
 }
